@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour {
 		}else {
 			enemyAnimator.SetFloat("Speed",Math.Abs(rigidBody.velocity.y));
 		}
-		Debug.Log(horizontal_movement + "|"+ vertical_movement);
+		//Debug.Log(horizontal_movement + "|"+ vertical_movement);
 	}
 
 	public void Play(){
