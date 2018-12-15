@@ -27,4 +27,9 @@ public class CoinController : MonoBehaviour {
 			transform.localPosition = coinPosition;
 		}
 	}
+
+	public void Play(){
+		coinPosition = new Vector3(Random.Range(-10.50f,10.50f),Random.Range(-6.00f,6.00f),transform.position.z);
+		transform.localPosition = coinPosition;
+	}
 }

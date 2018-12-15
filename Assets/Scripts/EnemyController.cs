@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour {
 
 	private Rigidbody2D rigidBody;
 	public UserController user;
-	public float speed = 5f;
+	public float speed = 6f;
 	private float horizontal_movement;
 	private float vertical_movement;
 	private Animator enemyAnimator;
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour {
 			rigidBody.velocity = new Vector2(horizontal_movement*speed,rigidBody.velocity.y);
 			transform.localScale = new Vector2(-1.25f,1.25f);
 		}else{
-			rigidBody.velocity = new Vector2(0,rigidBody.velocity.y);
+			rigidBody.velocity = new Vector2(1,rigidBody.velocity.y);
 		}
 
 		if(vertical_movement > 0f){
@@ -43,14 +43,14 @@ public class EnemyController : MonoBehaviour {
 		}else if(vertical_movement < 0f){
 			rigidBody.velocity = new Vector2(rigidBody.velocity.x,vertical_movement*speed);
 		}else{
-			rigidBody.velocity = new Vector2(rigidBody.velocity.x,0);
+			rigidBody.velocity = new Vector2(rigidBody.velocity.x,1);
 		}
 		if(Math.Abs(rigidBody.velocity.x) > 0.1){
 			enemyAnimator.SetFloat("Speed",Math.Abs(rigidBody.velocity.x));
 		}else {
 			enemyAnimator.SetFloat("Speed",Math.Abs(rigidBody.velocity.y));
 		}
-		//Debug.Log(horizontal_movement + "|"+ vertical_movement);
+		Debug.Log(horizontal_movement + "|"+ vertical_movement);
 	}
 
 	public void Play(){
@@ -58,12 +58,19 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	public void Reset(){
+		CancelInvoke("Movement");
 		horizontal_movement = 0;
 		vertical_movement = 0;
 		try{
 			enemyAnimator.SetFloat("Speed",0f);
 		}catch(Exception e){
 			Debug.Log(e);
+		}
+	}
+
+	public void IncreaseSpeed(int score){
+		if(score > 100){
+			speed = (6 + (score%100));
 		}
 	}
 }

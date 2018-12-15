@@ -11,6 +11,7 @@ public class StartController : MonoBehaviour {
 	private UserCaught caughtScript;
 	private UserController userScript;
 	private EnemyController enemyScript;
+	private CoinController coinScript;
 	public Text scoreText;
 	private int score;
 	// Use this for initialization
@@ -18,6 +19,7 @@ public class StartController : MonoBehaviour {
 		userScript = FindObjectOfType<UserController>();
 		caughtScript = FindObjectOfType<UserCaught>();
 		enemyScript = FindObjectOfType<EnemyController>();
+		coinScript = FindObjectOfType<CoinController>();
 		userScript.enabled = false;
 		enemyScript.enabled = false;
 		user.parent = board;
@@ -39,6 +41,7 @@ public class StartController : MonoBehaviour {
 		enemyScript.Play();
 		userScript.enabled = true;
 		userScript.Reset();
+		coinScript.Play();
 		score = 0;
 		scoreText.text = "Score : 0";
 	}
@@ -46,5 +49,6 @@ public class StartController : MonoBehaviour {
 	public void AddScore(int value){
 		score = score + value;
 		scoreText.text = "Score : " + score; 
+		enemyScript.IncreaseSpeed(score);
 	}
 }
